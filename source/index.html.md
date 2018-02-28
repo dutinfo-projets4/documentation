@@ -231,7 +231,7 @@ Parameter  | Description
 ---------- | -----------
 id         | ID of the element to be removed
 
-## Adding an group
+## Adding a group
 
 > Returns the ID of the added group
 
@@ -258,7 +258,7 @@ Parameter  | Description
 parent_grp | Parent group id, can be -1 for root one
 content    | Encrypted content of the group
 
-## Modifying an group
+## Modifying a group
 
 > Returns
 
@@ -282,6 +282,7 @@ content    | Encrypted content of the group
 ## Deleting a group
 
 > This returns the list of deleted elements which were in the removed group
+
 ```json
 {
 	"deleted": [
@@ -352,7 +353,7 @@ The client has to check if the Group / elements was already created on the clien
 `GET /update`
 
 <aside class="warning">
-You may never do timed requests to get updates from the API. <br />
+You must not do timed requests to get updates from the API. <br />
 The correct way to do is either to have a refresh button so that the user does it when he desires, or the more reliable way which is connecting to the push TCP server which will tell you when you need to call this route.
 </aside>
 
@@ -449,13 +450,14 @@ Contrary to revoke, deleting the token will fully erase it from the database. On
 
 # Administration requests
 
+## Listing users
+
 > Returns
 
 > 200 - Request has worked
 
 > 403 - You are not an admin
 
-## Listing users
 ```json
 {
 	"users": [
