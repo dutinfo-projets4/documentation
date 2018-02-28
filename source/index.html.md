@@ -49,6 +49,30 @@ The first example is the content for an element, the second one is the content f
 
 More details on theses in the technical documentation.
 
+# Registration
+```json
+{
+	"id": 123,
+	"token": "Generated token to be used directly"
+}
+```
+
+### Explanation
+This enables you to let users register from your client.
+This can be disabled from the server.
+
+### HTTP Request
+`PUT /users`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+username  | User's username
+email     | User's email
+password  | User's password
+machine_name | Machine name for the generated token
+publickey | OpenPGP public key to be used for the generated token
+
 # Authentication
 ## Challenge
 
@@ -77,7 +101,7 @@ You first need to get a token which is what you'll pass around all API calls.
 	"isAdmin": false,
 	"token": "token freshly generated on the server",
 	"data" : {
-		"group": [ 
+		"group": [
 			{
 				"id": 123,
 				"parent": 123, // Can be -1 for the root group
@@ -314,8 +338,8 @@ This allows you to edit your own profile.
 
 Parameter | Required | Description
 --------- | -------- | -----------
-username  | true     | Update the user's username
-email     | true     | Update the user's email
+username  | false    | Update the user's username
+email     | false | Update the user's email
 password  | false    | New user password, probably the SHA512 of the one the users want to have
 
 ## Delete account
@@ -339,6 +363,83 @@ Contrary to revoke, deleting the token will fully erase it from the database. On
 
 # Administration requests
 ## Listing users
+```json
+{
+	"users": [
+		{
+			"id": 123,
+			"username": "user's name",
+			"email": "user's email",
+			"isAdmin": false
+		}
+	]
+}
+```
+### HTTP Request
+
+`GET /users`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+limit     | false    | Used for pagination
+offset    | false    | Used for pagination
+
 ## Editing users
+### Explanation
+This allows you to edit a user's profile.
+
+### HTTP Request
+
+`PATCH /users`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+id        | true     | User's ID
+username  | false | Update the user's username
+email     | false     | Update the user's email
+isAdmin   | false | Whether the user is admin or not
+password  | false    | New user password, probably the SHA512 of the one the users want to have
+
+
 ## Deleting users
+### HTTP Request
+
+`DELETE /users`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+id        | true     | User's ID
+
+## Getting server config
+
+```json
+{
+	"register_captcha": false, // Not implemented yet
+	"limit_update": 30, // Limit the amount of /update request per minute,
+}
+```
+
+### Explanation
+Returns the global server configuration
+
+### HTTP Request
+`GET /config`
+
 ## Updating server config
+### Explanation
+Sets global server configuration
+
+### HTTP Request
+`PUT /config`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+register_captcha | false
+limit_update | 30
