@@ -452,12 +452,6 @@ Contrary to revoke, deleting the token will fully erase it from the database. On
 
 ## Listing users
 
-> Returns
-
-> 200 - Request has worked
-
-> 403 - You are not an admin
-
 ```json
 {
 	"users": [
@@ -470,6 +464,13 @@ Contrary to revoke, deleting the token will fully erase it from the database. On
 	]
 }
 ```
+
+> Returns
+
+> 200 - Request has worked
+
+> 403 - You are not an admin
+
 ### HTTP Request
 
 `GET /users`
@@ -549,6 +550,13 @@ Returns the global server configuration
 `GET /config`
 
 ## Updating server config
+
+> Returns
+
+> 200 - Configuration set
+
+> 403 - Not an admin
+
 ### Explanation
 Sets global server configuration
 
