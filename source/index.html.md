@@ -533,7 +533,9 @@ id        | true     | User's ID
 ```json
 {
 	"register_captcha": false, // Not implemented yet
-	"limit_update": 30, // Limit the amount of /update request per minute,
+	"limit_update": 30, // Limit the amount of /update request per minute
+	"public_register": true, // People can register by themself
+	"api_registering": true // People can be registered through the API (No need for the website)
 }
 ```
 
@@ -568,3 +570,5 @@ Parameter | Description
 --------- | -----------
 register_captcha | false
 limit_update | 30
+public_register| false
+api_registering | false
