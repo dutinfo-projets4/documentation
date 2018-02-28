@@ -278,7 +278,30 @@ You may never do timed requests to get updates from the API. <br />
 The correct way to do is either to have a refresh button so that the user does it when he desires, or the more reliable way which is connecting to the push TCP server which will tell you when you need to call this route.
 </aside>
 
-# User edition
+# User data
+## List token
+
+```json
+{
+	"tokens": [
+		{
+			"id": 123,
+			"name": "Encrypted machine name",
+			"IP": "IP address of the last API call with the token",
+			"loginTS": 123456789, // Timestamp of when the token was granted
+			"lastUpdateTS": 123456789 // Timestamp of the last API call
+		}
+	]
+}
+```
+
+### Explanation
+This will list the tokens that are in the database.
+You will not get the actual token, but rather the list of machine names, IPs and last login time.
+
+### HTTP Request
+`GET /token`
+
 ## Edit user's informations
 ### Explanation
 This allows you to edit your own profile.
@@ -299,50 +322,23 @@ password  | false    | New user password, probably the SHA512 of the one the use
 ### HTTP Request
 `DELETE /users`
 
-# Configuration requests
-## Setting config
-
-```json
-{
-	"id": 123
-}
-```
-
+## Revoke token
 ### Explanation
-These are server-side configuration. This is not encrypted, since no confidential element should be stored.
-If your client adds custom config, their name should be prefixed by the name of your client.
+This API call only revoke the token, which means you won't be able to log with it again.
+Though this also keeps it in the database, in case the user want to see IP or last login time.
 
 ### HTTP Request
-`POST /config`
+`PUT /token`
 
-### Query Parameters
-Parameter | Description
---------- | -----------
-name      | Name of the config
-value     | Value of the config
-
-## Updating config
-### HTTP Request
-`PUT /config`
-
-### Query Parameters
-Parameter | Description
---------- | -----------
-id        | ID of the config
-name      | Name of the config
-value     | Value of the config
-
-## Deleting config
+## Delete token
 ### Explanation
-Should probably not be used. Deletes config from the server.
+Contrary to revoke, deleting the token will fully erase it from the database. Only do this if you are sure you don't want to keep the data.
 
 ### HTTP Request
-`DELETE /config`
-
-### Query Parameters
-Parameter | Description
---------- | -----------
-id        | ID of the config
-
+`DELETE /token`
 
 # Administration requests
+## Listing users
+## Editing users
+## Deleting users
+## Updating server config
