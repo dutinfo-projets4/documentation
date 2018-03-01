@@ -147,6 +147,7 @@ Parameter | Description
 passcode  | SHA512(SHA512(username) + challenge + SHA512(password))
 challenge | ID of the challenge you got
 publickey | OpenPGP key used to sign the messages
+machine_name | Machine name for the token
 
 <aside class="notice">
 The client has basically 2 password. The first one is the one the user sets in order to encrypt his data.<br />
