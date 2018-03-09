@@ -108,7 +108,7 @@ You first need to get a token which is what you'll pass around all API calls.
 	"isAdmin": false,
 	"token": "token freshly generated on the server",
 	"data" : {
-		"group": [
+		"groups": [
 			{
 				"id": 123,
 				"parent": 123, // Can be -1 for the root group
@@ -316,7 +316,7 @@ id         | ID of the group to be removed
 				"content": "Encrypted JSON containing a group"
 			}
 	],
-	"element": [
+	"elements": [
 			{
 				"id": 12,
 				"group": 123,
