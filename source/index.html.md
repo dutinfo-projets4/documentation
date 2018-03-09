@@ -115,7 +115,7 @@ You first need to get a token which is what you'll pass around all API calls.
 				"content": "Encrypted JSON containing a group"
 			}
 		],
-		"element": [
+		"elements": [
 			{
 				"id": 12,
 				"group": 123,
@@ -309,7 +309,7 @@ id         | ID of the group to be removed
 
 ```json
 {
-	"group": [
+	"groups": [
 			{
 				"id": 123,
 				"parent": 123, // Can be -1 for the root group
