@@ -121,15 +121,7 @@ You first need to get a token which is what you'll pass around all API calls.
 				"group": 123,
 				"content": "Encrypted JSON containing an element"
 			}
-		],
-		"config": [
-			{
-				"id": 1,
-				"name": "The config name",
-				"value": "The selected value"
-			}
 		]
-	}
 }
 ```
 > Returns
@@ -329,13 +321,6 @@ id         | ID of the group to be removed
 				"id": 12,
 				"group": 123,
 				"content": "Encrypted JSON containing an element"
-			}
-	],
-	"config": [
-			{
-				"id": 1,
-				"name": "The config name",
-				"value": "The selected value"
 			}
 	]
 }
