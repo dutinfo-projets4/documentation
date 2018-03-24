@@ -20,7 +20,7 @@ Welcome to Alohomora's API. Here is everything you need to know in order to buil
 # Keep in mind
 ```
 X-ALOHOMORA-TOKEN: Your authentication token.
-X-ALOHOMORA-SIGNATURE: The OpenPGP signature of the body of the request, signed with the private key associated to the public key you sent while authentication.
+X-ALOHOMORA-SIGNATURE: The RSA signature of the body of the request, signed with the private key associated to the public key you sent while authentication.
 ```
 
 Every request made to the API should include the header "User-Agent" corresponding to your client's name.
@@ -78,7 +78,7 @@ username  | User's username
 email     | User's email
 password  | User's password
 machine_name | Machine name for the generated token
-publickey | OpenPGP public key to be used for the generated token
+public_key | RSA public key to be used for the generated token
 
 # Authentication
 ## Challenge
@@ -138,7 +138,7 @@ Parameter | Description
 --------- | -----------
 passcode  | SHA512(SHA512(username) + challenge + SHA512(password))
 challenge | ID of the challenge you got
-publickey | OpenPGP key used to sign the messages
+public_key | RSA key used to sign the messages
 machine_name | Machine name for the token
 
 <aside class="notice">
@@ -182,7 +182,7 @@ This route lets you add an element of any kind.
 ### Query Parameters
 Parameter  | Description
 ---------- | -----------
-parent_grp | Parent group id, can be -1 for root one
+parent_grp | Parent group id, optional if you want your element to be in the root directory
 content    | Encrypted content of the element
 
 ## Modifying an element
@@ -200,10 +200,12 @@ Basically the same as adding, but with a different HTTP verb, and the ID of the 
 `PUT /element`
 
 ### Query Parameters
+@TODO: Set root group
+
 Parameter  | Description
 ---------- | -----------
 id         | ID of the element modified
-parent_grp | Parent group id, can be -1 for root one
+parent_grp | Parent group id, optional if you don't want to modify it
 content    | Encrypted content of the element
 
 ## Deleting an element
@@ -248,7 +250,7 @@ This route lets you add groups.
 ### Query Parameters
 Parameter  | Description
 ---------- | -----------
-parent_grp | Parent group id, can be -1 for root one
+parent_grp | Parent group id, don't set it for root one
 content    | Encrypted content of the group
 
 ## Modifying a group
@@ -266,10 +268,11 @@ Basically the same as adding, but with a different HTTP verb, and the ID of the 
 `PUT /group`
 
 ### Query Parameters
+@TODO: Set root group
 Parameter  | Description
 ---------- | -----------
 id         | ID of the group modified
-parent_grp | Parent group id, can be -1 for root one
+parent_grp | Parent group id, optional if you don't want to modify it
 content    | Encrypted content of the group
 
 ## Deleting a group
