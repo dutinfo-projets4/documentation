@@ -18,6 +18,7 @@ search: true
 Welcome to Alohomora's API. Here is everything you need to know in order to build your own client.
 
 # Keep in mind
+## General infos
 ```
 X-ALOHOMORA-TOKEN: Your authentication token.
 X-ALOHOMORA-SIGNATURE: The RSA signature of the body of the request, signed with the private key associated to the public key you sent while authentication.
@@ -26,6 +27,24 @@ X-ALOHOMORA-SIGNATURE: The RSA signature of the body of the request, signed with
 Every request made to the API should include the header "User-Agent" corresponding to your client's name.
 This is the only one required until you have your authentication token.
 At this point, you will have to include a request id called "req_id" in your request body and also thoses headers.
+
+## Signature
+The signature serverside is made through this line:
+`$data = json_encode($request->request->all());`
+
+What this mean is that you have to create a json-formatted list of your parameters for the request in the same order.
+You mustn't add any carriage return or any extra spaces. That would invalidate the signature.
+
+### Request example
+Doing a POST request on /element with the following paramters (in this order):
+```
+req_id=12
+content=newElt
+parent_grp=2
+```
+
+The message to sign is
+`{"req_id":"12","content":"newElt","parent_grp":"2"}`
 
 # Official structure for content
 ```json
